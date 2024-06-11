@@ -17,27 +17,18 @@ driver = webdriver.Chrome(service=Service(driver_path), options=chrome_options)
 
 def get_about(urls):
     for url in urls:
-        company = url.replace("https://www.linkedin.com/company/", "").replace("/about/", "")
+        company = url.replace("https://www.linkedin.com/company/", "").replace("/about/", "").replace('/','')
 
         driver.get(url)
-        time.sleep(random.uniform(2, 5))
-        username_tag = driver.find_element(By.ID, "username")
-        username_tag.send_keys("jenese1987@noefa.com")
-
-        time.sleep(random.uniform(2, 5))
-        password_tag = driver.find_element(By.ID, "password")
-        password_tag.send_keys("1234@password")
-
-        sign_in_button = driver.find_element(By.XPATH, "//button[@aria-label='Sign in']")
-        sign_in_button.click()
-        time.sleep(random.uniform(2, 5))
-
-        p_tag = driver.find_element(By.CSS_SELECTOR, "p.white-space-pre-wrap")
+        time.sleep(random.uniform(2,3))
+        text = driver.find_element(By.XPATH, '''//*[@id="main-content"]/section[1]/div/section[1]/div/p''').text
+        # print(text)
+        time.sleep(random.uniform(2,3))
         with open(f"{company}.txt", "x") as f:
-            f.write(p_tag.text)
+            f.write(text)
             f.close()
         driver.quit()
 
-url = ["https://www.linkedin.com/company/hyrgpt/about/"]
+url = ["https://www.linkedin.com/company/aramco"]
 
 get_about(url)
