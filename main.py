@@ -22,13 +22,13 @@ def get_about(urls):
         driver.get(url)
         time.sleep(random.uniform(2,3))
         text = driver.find_element(By.XPATH, '''//*[@id="main-content"]/section[1]/div/section[1]/div/p''').text
-        # print(text)
+        print(text)
         time.sleep(random.uniform(2,3))
         with open(f"{company}.txt", "x") as f:
             f.write(text)
             f.close()
-        driver.quit()
+    driver.quit()
 
-url = ["https://www.linkedin.com/company/aramco"]
+url = ["https://www.linkedin.com/company/opkey"]
 
 get_about(url)
